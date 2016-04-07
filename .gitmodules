@@ -1,0 +1,3 @@
+[submodule "sparkic"]
+	path = sparkic
+	url = https://rgoulter@bitbucket.org/rgoulter/sparkic.git
