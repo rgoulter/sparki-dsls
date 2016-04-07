@@ -1,6 +1,3 @@
-// Doesn't work for Sparki/Leonardo,
-// since UART0 stuff (UDR0, etc) not defined.
-
 #include <stdio.h>
 #include <avr/io.h>
 #include <util/delay.h>
@@ -12,16 +9,16 @@ FILE mystdout;
 int uart_putchar(char c, FILE *stream) {
     if (c == '\n')
         uart_putchar('\r', stream);
-    loop_until_bit_is_set(UCSR0A, UDRE0);
-    UDR0 = c;
+    loop_until_bit_is_set(UCSR1A, UDRE1);
+    UDR1 = c;
 
     return 0;
 }
 
 void ioinit (void) {
-    UBRR0H = MYUBRR >> 8;
-    UBRR0L = MYUBRR;
-    UCSR0B = (1<<RXEN0)|(1<<TXEN0);
+    UBRR1H = MYUBRR >> 8;
+    UBRR1L = MYUBRR;
+    UCSR1B = (1<<RXEN1)|(1<<TXEN1);
 
     fdev_setup_stream(&mystdout, uart_putchar, NULL, _FDEV_SETUP_WRITE);
     stdout = &mystdout;
@@ -30,7 +27,7 @@ void ioinit (void) {
 int main (void) {
     ioinit();
 
-    printf("Hello World!!!\n");
+    printf("Hello World!\n");
 
     while(1) {
         printf("Hello world loop\n");

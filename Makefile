@@ -13,8 +13,11 @@ SPARKI_DIR  = sparkic/src
 SPARKI_FLAGS = -DNO_ACCEL -DNO_MAG
 INCLUDES = "-I$(AVR_DIR)/cores/arduino" \
            "-I$(AVR_DIR)/variants/leonardo"
-ARDUINO_FLAGS = -mmcu=atmega32u4 -DF_CPU=16000000L -DARDUINO=10608 \
-                -DARDUINO_AVR_LEONARDO -DARDUINO_ARCH_AVR \
+MCU = atmega32u4
+F_CPU = 16000000
+BAUD = 9600
+ARDUINO_FLAGS = -mmcu=$(MCU) -DF_CPU=$(F_CPU)L -DBAUD=$(BAUD) \
+                -DARDUINO=10608 -DARDUINO_AVR_LEONARDO -DARDUINO_ARCH_AVR \
                 -DUSB_VID=0x2341 -DUSB_PID=0x8036 \
                 '-DUSB_MANUFACTURER="Unknown"' '-DUSB_PRODUCT="Arduino Leonardo"' \
                 $(INCLUDES)
@@ -51,6 +54,7 @@ include sparkic/arduino_core.mk
 # e.g.
 # $(BUILD_DIR)/$(NAME).c.o: $(NAME).c $(BUILD_DIR)/
 # 	"$(AVR_BIN_DIR)/avr-gcc" $(CC_FLAGS) $(ARDUINO_FLAGS) "-Isrc/" $< -o $@
+include examples.mk
 
 
 $(BUILD_DIR)/%.elf: $(BUILD_DIR)/%.c.o $(BUILD_DIR)/core/core.a $(BUILD_DIR)/sparki.a
