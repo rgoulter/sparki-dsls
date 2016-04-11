@@ -56,6 +56,8 @@ include sparkic/arduino_core.mk
 # 	"$(AVR_BIN_DIR)/avr-gcc" $(CC_FLAGS) $(ARDUINO_FLAGS) "-Isrc/" $< -o $@
 include examples.mk
 
+include copilot.mk
+
 
 $(BUILD_DIR)/%.elf: $(BUILD_DIR)/%.c.o $(BUILD_DIR)/core/core.a $(BUILD_DIR)/sparki.a
 	"$(AVR_BIN_DIR)/avr-gcc" -w -Os -Wl,--gc-sections -mmcu=atmega32u4 -o $@ $< $(BUILD_DIR)/sparki.a "$(BUILD_DIR)/core/core.a" "-L$(BUILD_DIR)" -lm

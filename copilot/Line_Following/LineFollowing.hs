@@ -8,10 +8,9 @@ threshold = 700
 
 spec :: Spec
 spec = do
-    let myExtVar = externW32 "myVal" Nothing
-        lineLeft   = externFun "sparki_lineLeft" [] Nothing :: Stream Word32
-        lineCenter = externFun "sparki_lineCenter" [] Nothing :: Stream Word32
-        lineRight  = externFun "sparki_lineRight" [] Nothing :: Stream Word32
+    let lineLeft   = externFun "sparki_lineLeft" [] Nothing :: Stream Int16
+        lineCenter = externFun "sparki_lineCenter" [] Nothing :: Stream Int16
+        lineRight  = externFun "sparki_lineRight" [] Nothing :: Stream Int16
 
         forward = lineCenter < threshold
         left    = not forward && lineLeft < threshold
