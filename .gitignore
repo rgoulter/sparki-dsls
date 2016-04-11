@@ -14,3 +14,10 @@ build/
 *.elf
 *.hex
 *.eep
+
+# Haskell
+cabal.sandbox.config
+.cabal-sandbox/
+
+copilot-c99-codegen/
+*copilot-c99-codegen/
